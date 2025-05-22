@@ -193,7 +193,7 @@ export default function Home() {
 
           <div className="bg-card p-8 rounded-2xl shadow-lg border border-border card-3d reveal fade-bottom">
             <p className="text-lg text-card-foreground/90 leading-relaxed">
-              I am an Associate Degree student in Informatics Engineering at Politeknik Negeri Semarang, having started
+              I am an Associate Degree student in Informatics Engineering at State Polytechnic of Semarang, having started
               my academic journey in 2023. I have a strong interest in application development, particularly in User
               Interface design. Additionally, I am currently learning the fundamentals of Cyber Security to deepen my
               understanding of system and application security.
