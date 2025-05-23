@@ -6,19 +6,9 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { MessageSquare, Trash2 } from "lucide-react"
+import { MessageSquare } from "lucide-react"
 import { database } from "@/lib/firebase"
-import { ref, push, onValue, serverTimestamp, query, orderByChild, remove } from "firebase/database"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+import { ref, push, onValue, serverTimestamp, query, orderByChild } from "firebase/database"
 
 interface Comment {
   id: string
@@ -36,8 +26,6 @@ export function CommentForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState("")
-  const [commentToDelete, setCommentToDelete] = useState<string | null>(null)
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   // Fetch comments from Realtime Database when component mounts
   useEffect(() => {
@@ -95,33 +83,6 @@ export function CommentForm() {
       setSubmitError("An error occurred while sending your comment. Please try again.")
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  // Function to handle comment deletion
-  const handleDeleteComment = async (commentId: string) => {
-    try {
-      const commentRef = ref(database, `comments/${commentId}`)
-      await remove(commentRef)
-      // No need to update state manually as the onValue listener will catch the change
-    } catch (error) {
-      console.error("Error deleting comment:", error)
-      alert("Failed to delete comment. Please try again.")
-    }
-  }
-
-  // Open delete confirmation dialog
-  const openDeleteDialog = (commentId: string) => {
-    setCommentToDelete(commentId)
-    setIsDeleteDialogOpen(true)
-  }
-
-  // Confirm comment deletion
-  const confirmDelete = () => {
-    if (commentToDelete) {
-      handleDeleteComment(commentToDelete)
-      setIsDeleteDialogOpen(false)
-      setCommentToDelete(null)
     }
   }
 
@@ -263,13 +224,6 @@ export function CommentForm() {
                   <h5 className="font-semibold text-foreground">{comment.name}</h5>
                   <span className="text-xs text-foreground/60">{formatDate(comment.createdAt)}</span>
                 </div>
-                <button
-                  onClick={() => openDeleteDialog(comment.id)}
-                  className="text-foreground/40 hover:text-primary transition-colors p-1 rounded-full hover:bg-primary/10"
-                  aria-label="Delete comment"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
               </div>
               <p className="mt-3 text-foreground/80">{comment.comment}</p>
             </div>
@@ -283,26 +237,6 @@ export function CommentForm() {
           </div>
         )}
       </div>
-
-      {/* Delete Confirmation Dialog */}
-      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <AlertDialogContent className="bg-card border border-border">
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete Comment</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to delete this comment? This action cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="border-border hover:bg-background hover:text-foreground">
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete} className="bg-primary hover:bg-primary/90">
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   )
 }
