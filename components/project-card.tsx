@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, ExternalLink, Play, FileCode } from "lucide-react"
+import { Github, Play, FileCode, Download, FileText } from "lucide-react"
 
 interface ProjectCardProps {
   index: number
@@ -16,8 +16,9 @@ export function ProjectCard({ index }: ProjectCardProps) {
       description: "Online Testing Web for TOEFL exam",
       technologies: ["React", "MySQL"],
       image: "/porto/porto1.png",
-      demoType: "website", // website, video, prototype, github
-      demoUrl: "https://example.com/demo",
+      category: "web", // Add category field
+      demoType: "video", // Changed from website to video
+      videoUrl: "https://example.com/demo-video.mp4", // Can be direct video file or YouTube link
       githubUrl: "https://github.com/rafiiiqball24/aplikasi-ujian-online33.git",
     },
     {
@@ -25,47 +26,52 @@ export function ProjectCard({ index }: ProjectCardProps) {
       description: "Ticketing mobile application",
       technologies: ["Flutter", "Laravel"],
       image: "/porto/porto2.jpg",
+      category: "mobile",
       demoType: "prototype",
-      demoUrl:
+      prototypeUrl:
         "https://www.figma.com/proto/lwnoA9GxUdOjM9XEPhOlPV/flexyApp?node-id=242-61&p=f&t=E98sbroYmi5Op61V-1&scaling=scale-down&content-scaling=fixed&page-id=27%3A25&starting-point-node-id=100%3A97&show-proto-sidebar=1",
       githubUrl: "https://github.com/rafiiiqball24/appflexy.git",
     },
     {
-      title: "Task Manager",
-      description: "Aplikasi manajemen tugas dengan fitur reminder",
-      technologies: ["React Native", "Redux"],
-      image: "/placeholder.svg?height=200&width=300",
+      title: "Fashly E-Commerce",
+      description: "E-commerce web platform for fashion products",
+      technologies: ["Next.js", "Tailwind CSS"],
+      image: "/porto/porto4.png",
+      category: "web",
       demoType: "video",
-      demoUrl: "https://youtube.com/watch?v=demo-id",
+      videoUrl: "https://youtube.com/watch?v=demo-id",
+      githubUrl: "https://github.com/rafiiiqball24/Fashly.git",
+    },
+    {
+      title: "IOT Car Parking System",
+      description: "iot project simulating car parking system",
+      technologies: ["Arduino"],
+      image: "/porto/porto 5.jpg",
+      category: "iot",
+      demoType: "iot",
+      pdfReportUrl: "/porto/KELOMPOK_4_Car Parking System.pdf",
+      videoUrl: "/porto/porto.mp4",
       githubUrl: "https://github.com/username/project",
     },
     {
-      title: "Blog Platform",
-      description: "Platform blog dengan sistem manajemen konten",
-      technologies: ["Laravel", "MySQL", "Bootstrap"],
-      image: "/placeholder.svg?height=200&width=300",
-      demoType: "website",
-      demoUrl: "https://example.com/demo",
+      title: "Game Development",
+      description: "creating 3 games in 1 unity-based application",
+      technologies: ["Unity"],
+      image: "/porto/porto3.jpg",
+      category: "game",
+      demoType: "game",
+      apkUrl: "/porto/tubes.exe",
       githubUrl: "https://github.com/username/project",
     },
     {
-      title: "Weather App",
-      description: "Aplikasi cuaca dengan data real-time dan prediksi",
-      technologies: ["Flutter", "REST API"],
-      image: "/placeholder.svg?height=200&width=300",
+      title: "UI UX Design Mobile App",
+      description: "creating a ui ux design of a film streaming mobile application",
+      technologies: ["Figma"],
+      image: "/porto/porto6.png",
+      category: "uiux",
       demoType: "prototype",
-      demoUrl:
-        "https://www.figma.com/proto/yreuCIRRNUukVBs3N2lfM9/PBL-exam?node-id=62-791&p=f&t=JDs8nfzrRu8rmCgm-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=45%3A99&show-proto-sidebar=1",
-      githubUrl: "https://github.com/username/project",
-    },
-    {
-      title: "Social Media Dashboard",
-      description: "Dashboard untuk monitoring aktivitas sosial media",
-      technologies: ["React", "Chart.js", "Material UI"],
-      image: "/placeholder.svg?height=200&width=300",
-      demoType: "github",
-      demoUrl: "",
-      githubUrl: "https://github.com/username/project",
+      prototypeUrl:
+        "https://www.figma.com/proto/Gg1Thvi5wUrQwGfwbSiNOZ/Cinemate?node-id=87-414&t=No9CcFosUQh34xvP-1&scaling=scale-down&content-scaling=fixed&page-id=87%3A249&starting-point-node-id=87%3A250",
     },
   ]
 
@@ -73,8 +79,8 @@ export function ProjectCard({ index }: ProjectCardProps) {
 
   // Function to render the appropriate demo button based on demo type
   const renderDemoButton = () => {
-    switch (project.demoType) {
-      case "website":
+    switch (project.category) {
+      case "web":
         return (
           <Button
             variant="outline"
@@ -82,27 +88,40 @@ export function ProjectCard({ index }: ProjectCardProps) {
             className="text-foreground hover:text-primary hover:border-primary transition-colors"
             asChild
           >
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Live Demo
-            </a>
-          </Button>
-        )
-      case "video":
-        return (
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-foreground hover:text-primary hover:border-primary transition-colors"
-            asChild
-          >
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+            <a href={project.videoUrl} target="_blank" rel="noopener noreferrer">
               <Play className="h-4 w-4 mr-2" />
               Video Demo
             </a>
           </Button>
         )
-      case "prototype":
+      case "iot":
+        return (
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              asChild
+            >
+              <a href={project.pdfReportUrl} target="_blank" rel="noopener noreferrer">
+                <FileText className="h-4 w-4 mr-2" />
+                PDF Report
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              asChild
+            >
+              <a href={project.videoUrl} target="_blank" rel="noopener noreferrer">
+                <Play className="h-4 w-4 mr-2" />
+                Video
+              </a>
+            </Button>
+          </div>
+        )
+      case "game":
         return (
           <Button
             variant="outline"
@@ -110,15 +129,42 @@ export function ProjectCard({ index }: ProjectCardProps) {
             className="text-foreground hover:text-primary hover:border-primary transition-colors"
             asChild
           >
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+            <a href={project.apkUrl} target="_blank" rel="noopener noreferrer">
+              <Download className="h-4 w-4 mr-2" />
+              Download APK
+            </a>
+          </Button>
+        )
+      case "mobile":
+        return (
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-foreground hover:text-primary hover:border-primary transition-colors"
+            asChild
+          >
+            <a href={project.prototypeUrl} target="_blank" rel="noopener noreferrer">
               <FileCode className="h-4 w-4 mr-2" />
               Prototype
             </a>
           </Button>
         )
-      case "github":
+      case "uiux":
+        return (
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-foreground hover:text-primary hover:border-primary transition-colors"
+            asChild
+          >
+            <a href={project.prototypeUrl} target="_blank" rel="noopener noreferrer">
+              <FileCode className="h-4 w-4 mr-2" />
+              Figma Prototype
+            </a>
+          </Button>
+        )
       default:
-        return null // GitHub button is already shown
+        return null
     }
   }
 
@@ -147,18 +193,24 @@ export function ProjectCard({ index }: ProjectCardProps) {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between pt-2 border-t border-border">
-        <Button
-          variant="outline"
-          size="sm"
-          className="text-foreground hover:text-primary hover:border-primary transition-colors"
-          asChild
-        >
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-            <Github className="h-4 w-4 mr-2" />
-            GitHub
-          </a>
-        </Button>
-        {renderDemoButton()}
+        {project.category !== "uiux" && project.category !== "iot" && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-foreground hover:text-primary hover:border-primary transition-colors"
+            asChild
+          >
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4 mr-2" />
+              GitHub
+            </a>
+          </Button>
+        )}
+        {project.category === "iot" ? (
+          <div className="flex gap-2 flex-wrap">{renderDemoButton()}</div>
+        ) : (
+          renderDemoButton()
+        )}
       </CardFooter>
     </Card>
   )

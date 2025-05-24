@@ -171,7 +171,7 @@ export default function Home() {
           <h1 className="text-4xl md:text-4xl font-bold gradient-text">Rafi Iqbal Rendy Syachputra</h1>
 
           <p className="text-xl md:text-2xl text-foreground/80">
-            <span className="font-semibold text-primary">Frontend Developer</span> 
+            <span className="font-semibold text-primary">Informatics Engineering Student</span> 
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
