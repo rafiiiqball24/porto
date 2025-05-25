@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Github, Play, FileCode, Download, FileText } from "lucide-react"
+import { Github, ExternalLink, Play, FileCode, Download, FileText } from "lucide-react"
 
 interface ProjectCardProps {
   index: number
@@ -16,10 +16,9 @@ export function ProjectCard({ index }: ProjectCardProps) {
       description: "Online Testing Web for TOEFL exam",
       technologies: ["React", "MySQL"],
       image: "/porto/porto1.png",
-      category: "web", // Add category field
-      demoType: "video", // Changed from website to video
-      videoUrl: "https://example.com/demo-video.mp4", // Can be direct video file or YouTube link
-      githubUrl: "https://github.com/rafiiiqball24/aplikasi-ujian-online33.git",
+      category: "web",
+      demoType: "none", // Changed from "video" to "none"
+      githubUrl: "https://github.com/rafiiiqball24/aplikasi-ujian-online.git",
     },
     {
       title: "Flexy Mobile App",
@@ -34,12 +33,12 @@ export function ProjectCard({ index }: ProjectCardProps) {
     },
     {
       title: "Fashly E-Commerce",
-      description: "E-commerce web platform for fashion product",
+      description: "E-commerce web platform for fashion products",
       technologies: ["Next.js", "Tailwind CSS"],
       image: "/porto/porto4.png",
       category: "web",
-      demoType: "video",
-      videoUrl: "https://youtube.com/watch?v=demo-id",
+      demoType: "website", // Changed from "video" to "website"
+      websiteUrl: "https://fashly.rafiiqbal.my.id", // Changed from videoUrl to websiteUrl
       githubUrl: "https://github.com/rafiiiqball24/Fashly.git",
     },
     {
@@ -60,7 +59,7 @@ export function ProjectCard({ index }: ProjectCardProps) {
       image: "/porto/porto3.jpg",
       category: "game",
       demoType: "game",
-      apkUrl: "/porto/tubes.exe",
+      apkUrl: "https://example.com/game.apk",
       githubUrl: "https://github.com/username/project",
     },
     {
@@ -71,7 +70,7 @@ export function ProjectCard({ index }: ProjectCardProps) {
       category: "uiux",
       demoType: "prototype",
       prototypeUrl:
-        "https://www.figma.com/proto/Gg1Thvi5wUrQwGfwbSiNOZ/Cinemate?node-id=87-414&t=No9CcFosUQh34xvP-1&scaling=scale-down&content-scaling=fixed&page-id=87%3A249&starting-point-node-id=87%3A250",
+        "https://www.figma.com/design/Gg1Thvi5wUrQwGfwbSiNOZ/Cinemate?node-id=87-249&t=Y5kIXNK8Rres11VP-1",
     },
   ]
 
@@ -81,19 +80,36 @@ export function ProjectCard({ index }: ProjectCardProps) {
   const renderDemoButton = () => {
     switch (project.category) {
       case "web":
-        return (
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-foreground hover:text-primary hover:border-primary transition-colors"
-            asChild
-          >
-            <a href={project.videoUrl} target="_blank" rel="noopener noreferrer">
-              <Play className="h-4 w-4 mr-2" />
-              Video Demo
-            </a>
-          </Button>
-        )
+        if (project.demoType === "video") {
+          return (
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              asChild
+            >
+              <a href={project.videoUrl} target="_blank" rel="noopener noreferrer">
+                <Play className="h-4 w-4 mr-2" />
+                Video Demo
+              </a>
+            </Button>
+          )
+        } else if (project.demoType === "website") {
+          return (
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              asChild
+            >
+              <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Live Demo
+              </a>
+            </Button>
+          )
+        }
+        return null // For demoType "none"
       case "iot":
         return (
           <div className="flex gap-2">

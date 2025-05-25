@@ -148,7 +148,7 @@ export default function Home() {
             </button>
 
             <Button className="btn-futuristic" asChild>
-              <a href="/documents/rafi-iqbal-cv.pdf" download>
+              <a href="/porto/cv.pdf" download>
                 <Download className="mr-2 h-4 w-4" /> CV
               </a>
             </Button>
