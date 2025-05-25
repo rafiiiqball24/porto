@@ -34,7 +34,7 @@ export function ProjectCard({ index }: ProjectCardProps) {
     },
     {
       title: "Fashly E-Commerce",
-      description: "E-commerce web platform for fashion products",
+      description: "E-commerce web platform for fashion product",
       technologies: ["Next.js", "Tailwind CSS"],
       image: "/porto/porto4.png",
       category: "web",
