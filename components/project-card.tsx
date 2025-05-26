@@ -60,7 +60,7 @@ export function ProjectCard({ index }: ProjectCardProps) {
       category: "game",
       demoType: "game",
       apkUrl: "/porto/GAME.zip",
-      githubUrl: "hhttps://github.com/rafiiiqball24/games.git",
+      githubUrl: "https://github.com/rafiiiqball24/games.git",
     },
     {
       title: "UI UX Design Mobile App",
