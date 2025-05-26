@@ -362,7 +362,7 @@ export default function Home() {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://linkedin.com/in/"
+              href="https://www.linkedin.com/in/rafi-iqbal-rendy-syachputra-757248368/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors"
