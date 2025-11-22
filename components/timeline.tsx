@@ -14,10 +14,10 @@ const TimelineItem = ({ year, title, subtitle, description, icon, isLast = false
   return (
     <div className="flex">
       <div className="flex flex-col items-center mr-6">
-        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white shadow-lg">
+        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg border border-primary/30">
           {icon}
         </div>
-        {!isLast && <div className="w-1 h-full bg-gradient-to-b from-primary to-primary/20 mt-4"></div>}
+        {!isLast && <div className="w-1 h-full bg-gradient-to-b from-primary to-primary/30 mt-4"></div>}
       </div>
       <div className="pb-12">
         <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full mb-3">
@@ -25,7 +25,7 @@ const TimelineItem = ({ year, title, subtitle, description, icon, isLast = false
         </span>
         <h3 className="text-xl font-bold text-foreground mb-1">{title}</h3>
         <p className="text-sm text-foreground/60 mb-3">{subtitle}</p>
-        <p className="text-foreground/80 bg-card p-4 rounded-xl border border-border">{description}</p>
+        <p className="text-foreground/80 lux-card p-4 rounded-xl border border-primary/20">{description}</p>
       </div>
     </div>
   )
@@ -33,6 +33,14 @@ const TimelineItem = ({ year, title, subtitle, description, icon, isLast = false
 
 export function Timeline() {
   const timelineItems = [
+    {
+      year: "August 2025 - December 2025",
+      title: "Web Frontend Developer Intern",
+      subtitle: "PT Cipta Anya Nugraha (CAN Creative)",
+      description:   "Created responsive web interfaces using Vue.js and Tailwind CSS, focusing on clean UI and consistent user experience.",
+      icon: <Briefcase  className="h-5 w-5" />,
+    },
+    
     {
       year: "2023 - Now",
       title: "Informatics Engineering",
@@ -65,7 +73,7 @@ export function Timeline() {
   ]
 
   return (
-    <div className="bg-card p-8 rounded-2xl shadow-lg border border-border">
+    <div className="lux-card p-8 rounded-2xl shadow-lg border border-primary/20">
       {timelineItems.map((item, index) => (
         <TimelineItem
           key={index}

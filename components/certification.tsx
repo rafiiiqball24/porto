@@ -9,7 +9,7 @@ interface CertificationProps {
   issuer: string
   date: string
   image: string
-  type: "pdf" | "web" // Tipe sertifikat: pdf atau web
+  type: "pdf" | "web"
   pdfUrl?: string
   webUrl?: string
   tags?: string[]
@@ -17,15 +17,15 @@ interface CertificationProps {
 
 const Certification = ({ title, issuer, date, image, type, pdfUrl, webUrl, tags }: CertificationProps) => {
   return (
-    <Card className="overflow-hidden border-border hover:border-primary transition-all duration-300 card-3d">
-      <div className="relative h-48 w-full overflow-hidden border-b border-border group">
+    <Card className="lux-card overflow-hidden border border-primary/20 hover:border-primary/40 transition-all duration-300 card-3d">
+      <div className="relative h-48 w-full overflow-hidden border-b border-primary/20 group">
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
           fill
           className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
       <CardHeader>
         <CardTitle className="text-xl text-foreground">{title}</CardTitle>
@@ -50,7 +50,7 @@ const Certification = ({ title, issuer, date, image, type, pdfUrl, webUrl, tags 
             <Button
               variant="outline"
               size="sm"
-              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              className="border-primary/40 bg-white/5 text-primary hover:bg-primary/15 transition-colors"
               asChild
             >
               <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
@@ -61,7 +61,7 @@ const Certification = ({ title, issuer, date, image, type, pdfUrl, webUrl, tags 
             <Button
               variant="outline"
               size="sm"
-              className="text-foreground hover:text-primary hover:border-primary transition-colors"
+              className="border-primary/40 bg-white/5 text-primary hover:bg-primary/15 transition-colors"
               asChild
             >
               <a href={pdfUrl} download>
@@ -75,7 +75,7 @@ const Certification = ({ title, issuer, date, image, type, pdfUrl, webUrl, tags 
           <Button
             variant="outline"
             size="sm"
-            className="text-foreground hover:text-primary hover:border-primary transition-colors"
+            className="border-primary/40 bg-white/5 text-primary hover:bg-primary/15 transition-colors"
             asChild
           >
             <a href={webUrl} target="_blank" rel="noopener noreferrer">
@@ -97,7 +97,7 @@ export function CertificationGrid() {
       date: "Oktober 2024",
       image: "/photos/sertif1.png",
       type: "pdf",
-      pdfUrl: "/certificate/certif1.pdf", // Path ke file PDF
+      pdfUrl: "/certificate/certif1.pdf",
       tags: ["MySQL", "Database"],
     },
     {
@@ -106,16 +106,16 @@ export function CertificationGrid() {
       date: "Oktober 2024",
       image: "/photos/sertif2.png",
       type: "pdf",
-      pdfUrl: "/certificate/certif2.pdf", // Path ke file PDF
+      pdfUrl: "/certificate/certif2.pdf",
       tags: ["MySQL", "Database"],
     },
     {
       title: "Career Essentials in Generative AI",
-      issuer: "Microsoft and Linkedln  ",
+      issuer: "Microsoft and Linkedln",
       date: "November 2024",
       image: "/photos/sertif3.png",
       type: "pdf",
-      pdfUrl: "/certificate/certif3.pdf", // Path ke file PDF
+      pdfUrl: "/certificate/certif3.pdf",
       tags: ["AI", "Machine Learning"],
     },
     {
@@ -124,7 +124,7 @@ export function CertificationGrid() {
       date: "Januari 2025",
       image: "/photos/sertif4.png",
       type: "web",
-      webUrl: "https://www.credly.com/badges/a8758c5b-eb39-4dbd-adb1-257a26deb0db/public_url", // URL ke sertifikat online
+      webUrl: "https://www.credly.com/badges/a8758c5b-eb39-4dbd-adb1-257a26deb0db/public_url",
       tags: ["Network", "Cisco"],
     },
     {
@@ -133,7 +133,7 @@ export function CertificationGrid() {
       date: "Desember 2022",
       image: "/photos/sertif5.png",
       type: "web",
-      webUrl: "https://www.credly.com/badges/d0653c32-84bd-4a67-9785-46ad33512c7b/public_url", // URL ke sertifikat online
+      webUrl: "https://www.credly.com/badges/d0653c32-84bd-4a67-9785-46ad33512c7b/public_url",
       tags: ["Digital Content", "Digital Literacy"],
     },
   ]

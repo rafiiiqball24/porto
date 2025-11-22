@@ -7,7 +7,7 @@ interface SkillProps {
 
 const Skill = ({ image, name }: SkillProps) => {
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-card rounded-xl shadow-lg border border-border hover:border-primary transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl card-3d">
+    <div className="flex flex-col items-center justify-center p-6 lux-card rounded-xl border border-primary/20 hover:border-primary/40 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl card-3d">
       <div className="relative h-16 w-16 mb-4">
         <Image src={image || "/placeholder.svg"} alt={name} fill className="object-contain" />
       </div>
@@ -20,13 +20,13 @@ export function SkillGrid() {
   const skills = [
     { image: "/bahasa/flutter.png", name: "Flutter" },
     { image: "/bahasa/react.png", name: "React" },
-    { image: "/bahasa/nextjs.png", name: "Next.js" },
+    { image: "/bahasa/tailwind.png", name: "Tailwind css" },
     { image: "/bahasa/laravel.png", name: "Laravel" },
     { image: "/bahasa/php.png", name: "PHP" },
     { image: "/bahasa/python.png", name: "Python" },
     { image: "/bahasa/mysql.png", name: "MySQL" },
     { image: "/bahasa/figma.png", name: "Figma" },
-    { image: "/bahasa/vscode.png", name: "VSCode" },
+    { image: "/bahasa/vue.png", name: "Vue.js" },
     { image: "/bahasa/xampp.png", name: "XAMPP" },
   ]
 

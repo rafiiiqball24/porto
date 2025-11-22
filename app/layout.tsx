@@ -1,10 +1,11 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Manrope, Playfair_Display } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-body" })
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-display" })
 
 export const metadata: Metadata = {
   title: "Rafi Iqbal | Frontend Developer",
@@ -19,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+      <body className={`${manrope.variable} ${playfair.variable} font-sans`}>
+        <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
