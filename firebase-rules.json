@@ -1,10 +1,6 @@
 {
   "rules": {
     ".read": false,
-    ".write": false,
-    "comments": {
-      ".read": true,
-      ".write": true
-    }
+    ".write": false
   }
 }

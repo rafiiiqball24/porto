@@ -1,29 +1,56 @@
 import type React from "react"
-import "./globals.css"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Manrope, Playfair_Display } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
+import "./globals.css"
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-body" })
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-display" })
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+})
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  title: "Rafi Iqbal | Frontend Developer",
-  description: "Portfolio website Rafi Iqbal, seorang Frontend Developer dengan fokus di Flutter, React, dan Next.js",
-    generator: 'v0.dev'
+  title: {
+    default: "Rafi Iqbal — Frontend Developer",
+    template: "%s — Rafi Iqbal",
+  },
+  description:
+    "Portfolio Rafi Iqbal, frontend developer based in Semarang building responsive web and mobile experiences.",
+  keywords: ["Rafi Iqbal", "Frontend Developer", "Vue.js", "React", "Flutter", "Semarang"],
+  authors: [{ name: "Rafi Iqbal" }],
+  creator: "Rafi Iqbal",
+  openGraph: {
+    title: "Rafi Iqbal — Frontend Developer",
+    description: "Clear, responsive, and carefully crafted digital experiences.",
+    type: "website",
+    locale: "en_US",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f2efe6",
+}
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
-      <body className={`${manrope.variable} ${playfair.variable} font-sans`}>
-        <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+    <html lang="en">
+      <body className={`${manrope.variable} ${playfair.variable}`}>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        {children}
       </body>
     </html>
   )

@@ -88,7 +88,7 @@ export function ProjectCard({ index }: ProjectCardProps) {
   const renderDemoButton = () => {
     switch (project.category) {
         case "web": {
-        const websiteUrl = project.websiteUrl || project.projectUrl
+        const websiteUrl = project.websiteUrl
         if (project.demoType === "video" && project.videoUrl) {
           return (
             <Button

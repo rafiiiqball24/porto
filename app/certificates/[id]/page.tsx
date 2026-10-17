@@ -4,12 +4,12 @@ import { ChevronLeft, Download, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 interface CertificatePageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
-export default function CertificatePage({ params }: CertificatePageProps) {
+export default async function CertificatePage({ params }: CertificatePageProps) {
   // Simulasi data sertifikat
   const certificates = [
     {
@@ -54,7 +54,8 @@ export default function CertificatePage({ params }: CertificatePageProps) {
     },
   ]
 
-  const certificate = certificates.find((cert) => cert.id === params.id)
+  const { id } = await params
+  const certificate = certificates.find((cert) => cert.id === id)
 
   if (!certificate) {
     notFound()
