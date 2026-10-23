@@ -86,7 +86,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icon.svg",
+    icon: [{ url: "/icon.svg?v=2", type: "image/svg+xml", sizes: "any" }],
+    shortcut: [{ url: "/icon.svg?v=2", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
   verification: {
     google: "ZmMGctcq9nIwDjjQRKbFWQ6GXYXXqh8UsHdEjMM3pj0",
