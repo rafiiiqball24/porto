@@ -25,7 +25,7 @@ export const projects = [
     image: "/porto/porto8.png",
     category: "web",
     demoType: "website",
-    websiteUrl: "https://shop-phri.can.co.id/",
+    websiteUrl: "https://phri.or.id/shop",
   },
   {
     title: "Ujian Online App",

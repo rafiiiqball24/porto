@@ -5,6 +5,7 @@ import {
   Download,
   ExternalLink,
   Github,
+  Gitlab,
   Instagram,
   Linkedin,
   Mail,
@@ -15,119 +16,8 @@ import { MotionCanvas } from "@/components/motion-canvas"
 import { ProjectGallery } from "@/components/project-gallery"
 import { Reveal } from "@/components/reveal"
 import { SiteNav } from "@/components/site-nav"
-
-const featuredProjects = [
-  {
-    number: "Featured / 01",
-    title: "Deep Sky Villa",
-    description:
-      "A hospitality website for a villa stay in Karimunjawa, built to make the atmosphere, accommodation, and booking journey feel clear from the first screen.",
-    tags: ["Nuxt.js", "Vue.js", "Tailwind CSS"],
-    image: "/porto/Screenshot 2026-10-17 221446.png",
-    imageAlt: "Deep Sky Villa homepage showing the villa grounds and pool",
-    links: [{ label: "Visit website", href: "https://deepsky-villa.com/" }],
-  },
-  {
-    number: "Featured / 02",
-    title: "Grand Mega Diving Resort",
-    description:
-      "A resort website that presents rooms, facilities, and the route to reserve a stay through an immersive, image-led experience.",
-    tags: ["Nuxt.js", "Vue.js", "Tailwind CSS"],
-    image: "/porto/Screenshot 2026-10-17 221015.png",
-    imageAlt: "Grand Mega Diving Resort homepage showing a resort room",
-    links: [{ label: "Visit website", href: "https://grandmegadivingresort.id/" }],
-  },
-  {
-    number: "Featured / 03",
-    title: "Srikandi Group",
-    description:
-      "A company website for Srikandi Group that helps visitors explore its housing and company information with a direct, approachable interface.",
-    tags: ["Nuxt.js", "Vue.js", "Tailwind CSS"],
-    image: "/porto/Screenshot 2026-10-17 221034.png",
-    imageAlt: "Srikandi Group homepage showing a housing development",
-    links: [{ label: "Visit website", href: "https://srikandigroup.com/" }],
-  },
-  {
-    number: "Featured / 04",
-    title: "CreativLabz Affiliate Center",
-    description:
-      "A focused affiliate dashboard for monitoring performance, sharing referral links, and managing account activity within the CreativLabz commerce ecosystem.",
-    tags: ["Vue.js", "Tailwind CSS", "Responsive UI"],
-    image: "/porto/porto7.png",
-    imageAlt: "CreativLabz affiliate dashboard showing referral tools and performance cards",
-    links: [{ label: "Visit website", href: "https://creativlabz.co.id/" }],
-  },
-]
-
-const moreProjects = [
-  {
-    number: "Archive / 05",
-    title: "PHRI Shop",
-    description:
-      "An e-commerce experience for Perhimpunan Hotel dan Restoran Indonesia, built around clear discovery, approachable navigation, and responsive storefront presentation.",
-    tags: ["Vue.js", "Nuxt.js", "Tailwind CSS"],
-    image: "/porto/porto8.png",
-    imageAlt: "PHRI Shop landing page with an orange retail campaign hero",
-    links: [{ label: "Visit website", href: "https://shop-phri.can.co.id/" }],
-  },
-  {
-    number: "Archive / 06",
-    title: "Flexy Mobile App",
-    description:
-      "A mobile ticketing concept developed with a multidisciplinary student team, connecting a Flutter interface with a Laravel backend and a tested Figma prototype.",
-    tags: ["Flutter", "Laravel", "Figma"],
-    image: "/porto/porto2.jpg",
-    imageAlt: "Flexy mobile app project team after a classroom presentation",
-    links: [{ label: "Open prototype", href: "https://www.figma.com/proto/lwnoA9GxUdOjM9XEPhOlPV/flexyApp?node-id=242-61&p=f&t=E98sbroYmi5Op61V-1&scaling=scale-down&content-scaling=fixed&page-id=27%3A25&starting-point-node-id=100%3A97&show-proto-sidebar=1" }],
-  },
-  {
-    number: "Archive / 07",
-    title: "Online Examination App",
-    description: "A browser-based TOEFL testing interface with participant, question, schedule, and result management.",
-    tags: ["Laravel", "PHP", "MySQL"],
-    image: "/porto/porto1.png",
-    imageAlt: "Online examination admin dashboard",
-    links: [{ label: "View on GitHub", href: "https://github.com/rafiiiqball24/aplikasi-ujian-online.git" }],
-  },
-  {
-    number: "Archive / 08",
-    title: "IoT Parking System",
-    description: "An Arduino prototype that simulates parking availability and entry management using connected sensors.",
-    tags: ["Arduino", "IoT", "C++"],
-    image: "/porto/porto 5.jpg",
-    imageAlt: "IoT parking system project team presenting the Arduino prototype",
-    links: [
-      { label: "Report", href: "/porto/KELOMPOK_4_Car Parking System.pdf" },
-      { label: "Video", href: "/porto/porto.mp4" },
-    ],
-  },
-  {
-    number: "Archive / 09",
-    title: "Unity Game Collection",
-    description: "Three small games assembled in a single Unity project as an exploration of gameplay systems and interaction.",
-    tags: ["Unity", "C#", "Game Design"],
-    image: "/porto/porto3.jpg",
-    imageAlt: "Unity game project team presentation",
-    links: [
-      { label: "View on GitHub", href: "https://github.com/rafiiiqball24/games.git" },
-      { label: "Project files", href: "/porto/GAME.zip" },
-    ],
-  },
-  {
-    number: "Archive / 10",
-    title: "Cinemate UI/UX",
-    description: "A mobile streaming concept focused on movie discovery, browsing patterns, and a familiar entertainment interface.",
-    tags: ["Figma", "Mobile UI", "UX Design"],
-    image: "/porto/porto6.png",
-    imageAlt: "Cinemate mobile streaming app interface",
-    links: [
-      {
-        label: "Figma",
-        href: "https://www.figma.com/design/Gg1Thvi5wUrQwGfwbSiNOZ/Cinemate?node-id=87-249&t=Y5kIXNK8Rres11VP-1",
-      },
-    ],
-  },
-]
+import { featuredProjects, moreProjects } from "@/lib/projects"
+import { siteConfig } from "@/lib/site-config"
 
 const skillGroups = [
   { title: "Frontend", skills: ["Vue.js", "React", "Next.js", "Tailwind CSS"] },
@@ -261,21 +151,97 @@ const tickerItems = [
 ]
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        url: siteConfig.url,
+        name: `${siteConfig.name} Portfolio`,
+        description: siteConfig.description,
+        inLanguage: "en",
+        publisher: { "@id": `${siteConfig.url}/#person` },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${siteConfig.url}/#profile-page`,
+        url: siteConfig.url,
+        name: siteConfig.title,
+        description: siteConfig.description,
+        inLanguage: "en",
+        isPartOf: { "@id": `${siteConfig.url}/#website` },
+        mainEntity: { "@id": `${siteConfig.url}/#person` },
+      },
+      {
+        "@type": "Person",
+        "@id": `${siteConfig.url}/#person`,
+        name: siteConfig.name,
+        alternateName: siteConfig.shortName,
+        url: siteConfig.url,
+        image: `${siteConfig.url}/photos/profile3.png`,
+        email: `mailto:${siteConfig.email}`,
+        jobTitle: "Frontend Developer",
+        description: siteConfig.description,
+        knowsAbout: ["Vue.js", "Nuxt.js", "React", "Next.js", "Tailwind CSS", "Flutter", "Laravel", "Web accessibility", "Responsive web design"],
+        sameAs: [siteConfig.github, siteConfig.gitlab, siteConfig.linkedin, siteConfig.instagram],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Semarang",
+          addressRegion: "Central Java",
+          addressCountry: "ID",
+        },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "Politeknik Negeri Semarang",
+        },
+        worksFor: {
+          "@type": "Organization",
+          name: "PT Cipta Anya Nugraha",
+        },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteConfig.url}/#projects`,
+        name: "Selected frontend and software development projects",
+        numberOfItems: featuredProjects.length + moreProjects.length,
+        itemListElement: [...featuredProjects, ...moreProjects].map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "CreativeWork",
+            name: project.title,
+            description: project.description,
+            image: `${siteConfig.url}${encodeURI(project.image)}`,
+            creator: { "@id": `${siteConfig.url}/#person` },
+            keywords: project.tags.join(", "),
+            url: `${siteConfig.url}/projects/${project.slug}`,
+            sameAs: project.links.find((link) => link.href.startsWith("http"))?.href,
+          },
+        })),
+      },
+    ],
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <SiteNav />
       <MotionCanvas />
 
       <main id="main-content">
         <section id="top" className="hero">
           <div className="site-shell hero-grid">
-            <Reveal>
-              <p className="eyebrow text-[var(--forest)]">Frontend developer · Indonesia</p>
+            <Reveal initiallyVisible>
+              <p className="eyebrow text-[var(--forest)]">Rafi Iqbal Rendy Syachputra · Frontend developer</p>
               <h1 className="hero-title">
-                Clear ideas, <em>carefully</em> built.
+                Frontend development, <em>carefully</em> built.
               </h1>
               <p className="hero-copy">
-                I&apos;m Rafi Iqbal, a frontend web developer focused on responsive, high-performance websites and interface systems. I turn visual direction into accessible, maintainable experiences with Vue, Nuxt, and Tailwind CSS.
+                I&apos;m Rafi Iqbal Rendy Syachputra, a frontend web developer focused on responsive, high-performance websites and interface systems. I turn visual direction into accessible, maintainable experiences with Vue, Nuxt, and Tailwind CSS.
               </p>
               <div className="button-row">
                 <a className="button-primary" href="#work">
@@ -293,11 +259,11 @@ export default function Home() {
               </p>
             </Reveal>
 
-            <Reveal className="portrait-wrap" delay={120}>
+            <Reveal className="portrait-wrap" initiallyVisible>
               <div className="portrait-frame">
                 <Image
                   src="/photos/profile3.png"
-                  alt="Portrait of Rafi Iqbal"
+                  alt="Portrait of Rafi Iqbal Rendy Syachputra"
                   fill
                   priority
                   sizes="(max-width: 960px) 90vw, 36vw"
@@ -346,7 +312,7 @@ export default function Home() {
               <p className="eyebrow text-[var(--clay)]">Profile</p>
               <h2 className="section-heading">Design sense. Engineering discipline.</h2>
               <p className="section-intro">
-                My background moves between software and visual production. That combination helps me think about both how an interface works and how it feels to use.
+                Rafi Iqbal Rendy Syachputra brings together software development and visual production. That combination helps me think about both how an interface works and how it feels to use.
               </p>
             </Reveal>
 
@@ -365,7 +331,7 @@ export default function Home() {
                     <h3>Projects represented</h3>
                     <p>Web, mobile, IoT, game, and product design.</p>
                   </div>
-                  <strong>7</strong>
+                  <strong>10</strong>
                 </div>
               </Reveal>
             </div>
@@ -451,15 +417,23 @@ export default function Home() {
                   className="social-link"
                   href="https://github.com/rafiiiqball24"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                 >
                   <Github className="h-4 w-4" aria-hidden="true" /> GitHub
                 </a>
                 <a
                   className="social-link"
+                  href={siteConfig.gitlab}
+                  target="_blank"
+                  rel="me noopener noreferrer"
+                >
+                  <Gitlab className="h-4 w-4" aria-hidden="true" /> GitLab
+                </a>
+                <a
+                  className="social-link"
                   href="https://www.linkedin.com/in/rafi-iqbal-72a038335"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                 >
                   <Linkedin className="h-4 w-4" aria-hidden="true" /> LinkedIn
                 </a>
@@ -467,7 +441,7 @@ export default function Home() {
                   className="social-link"
                   href="https://instagram.com/rafi_iqbal_"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                 >
                   <Instagram className="h-4 w-4" aria-hidden="true" /> Instagram
                 </a>
@@ -483,7 +457,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="site-shell footer-inner">
-          <p>© {new Date().getFullYear()} Rafi Iqbal. Designed and built with intention.</p>
+          <p>© {new Date().getFullYear()} {siteConfig.name}. Designed and built with intention.</p>
           <a className="inline-flex min-h-11 items-center gap-2 hover:text-[var(--sun)]" href="#top">
             Back to top
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

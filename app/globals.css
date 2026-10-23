@@ -542,6 +542,15 @@ textarea:focus-visible {
   color: var(--paper);
 }
 
+.work-section,
+#profile,
+#certifications,
+.journey-section,
+.contact-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
 .work-section .section-intro {
   color: rgba(242, 239, 230, 0.68);
 }
@@ -674,6 +683,12 @@ textarea:focus-visible {
   margin-top: clamp(4rem, 8vw, 7rem);
   padding-top: 2rem;
   border-top: 1px solid rgba(242, 239, 230, 0.3);
+  cursor: pointer;
+  list-style: none;
+}
+
+.more-projects-control::-webkit-details-marker {
+  display: none;
 }
 
 .more-projects-control > div {
@@ -695,6 +710,14 @@ textarea:focus-visible {
 .more-projects-control .button-secondary:hover {
   background: var(--paper);
   color: var(--ink);
+}
+
+.more-projects-control .button-secondary svg {
+  transition: transform 180ms ease;
+}
+
+.more-projects-disclosure[open] .button-secondary svg {
+  transform: rotate(180deg);
 }
 
 .more-projects-grid {
@@ -1243,6 +1266,167 @@ textarea:focus-visible {
   letter-spacing: 0.06em;
 }
 
+.case-study-main {
+  min-height: 100vh;
+  padding-top: 4.8rem;
+}
+
+.case-back-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.case-hero {
+  padding-block: clamp(4.5rem, 10vw, 8rem) clamp(2.5rem, 6vw, 5rem);
+}
+
+.case-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.case-breadcrumb a {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.case-hero h1 {
+  max-width: 12ch;
+  margin: 1.1rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(4rem, 10vw, 8.8rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+.case-lead {
+  max-width: 48rem;
+  margin: 2rem 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.7;
+}
+
+.case-tags .tag {
+  border-color: var(--line);
+  color: var(--forest);
+}
+
+.case-visual {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: clamp(1rem, 2vw, 1.8rem);
+  background: var(--paper-deep);
+  box-shadow: 1rem 1rem 0 var(--sun);
+}
+
+.case-content {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(2rem, 8vw, 8rem);
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.case-content h2 {
+  max-width: 10ch;
+  margin: 1rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.case-details > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.8;
+}
+
+.case-details dl {
+  margin: 2.5rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.case-details dl > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.4fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-details dt {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-details dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.case-next {
+  padding-block: clamp(3rem, 7vw, 6rem);
+  border-top: 1px solid var(--line);
+}
+
+.case-next > p {
+  margin: 0 0 1rem;
+  color: var(--clay);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.case-next > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.case-next svg {
+  width: clamp(2rem, 6vw, 4.5rem);
+  height: clamp(2rem, 6vw, 4.5rem);
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.case-next a:hover svg {
+  transform: translate(0.25rem, -0.25rem);
+}
+
 .reveal {
   opacity: 0;
   filter: blur(8px);
@@ -1261,7 +1445,8 @@ textarea:focus-visible {
   .hero-grid,
   .project-feature,
   .profile-grid,
-  .contact-grid {
+  .contact-grid,
+  .case-content {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1331,6 +1516,16 @@ textarea:focus-visible {
 
   .section-space {
     padding-block: 4.8rem;
+  }
+
+  .case-visual {
+    aspect-ratio: 4 / 3;
+    box-shadow: 0.55rem 0.55rem 0 var(--sun);
+  }
+
+  .case-details dl > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
   }
 
   .hero {

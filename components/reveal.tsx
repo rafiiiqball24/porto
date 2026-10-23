@@ -6,14 +6,16 @@ interface RevealProps {
   children: ReactNode
   className?: string
   delay?: number
+  initiallyVisible?: boolean
 }
 
-export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
+export function Reveal({ children, className = "", delay = 0, initiallyVisible = false }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const element = ref.current
     if (!element) return
+    if (initiallyVisible) return
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (reduceMotion) {
@@ -30,12 +32,13 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
 
     observer.observe(element)
     return () => observer.disconnect()
-  }, [])
+  }, [initiallyVisible])
 
   return (
     <div
       ref={ref}
       className={`reveal ${className}`.trim()}
+      data-visible={initiallyVisible ? "true" : undefined}
       style={{ "--reveal-delay": `${delay}ms`, transitionDelay: `${delay}ms` } as CSSProperties}
     >
       {children}

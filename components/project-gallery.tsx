@@ -1,32 +1,20 @@
-"use client"
-
 import Image from "next/image"
-import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react"
-import { useState } from "react"
-
-type ProjectLink = {
-  label: string
-  href: string
-}
-
-type Project = {
-  number: string
-  title: string
-  description: string
-  tags: string[]
-  image: string
-  imageAlt: string
-  links: ProjectLink[]
-}
+import Link from "next/link"
+import { ArrowUpRight, ChevronDown } from "lucide-react"
+import type { Project, ProjectLink } from "@/lib/projects"
 
 type ProjectGalleryProps = {
   featuredProjects: Project[]
   moreProjects: Project[]
 }
 
-function ProjectLinks({ links }: { links: ProjectLink[] }) {
+function ProjectLinks({ links, project }: { links: ProjectLink[]; project: Project }) {
   return (
     <div className="project-links">
+      <Link className="text-link" href={`/projects/${project.slug}`} aria-label={`View ${project.title} case study`}>
+        Case study
+        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
       {links.map((link) => {
         const isDownload = link.href.endsWith(".zip")
 
@@ -49,8 +37,6 @@ function ProjectLinks({ links }: { links: ProjectLink[] }) {
 }
 
 export function ProjectGallery({ featuredProjects, moreProjects }: ProjectGalleryProps) {
-  const [showMore, setShowMore] = useState(false)
-
   return (
     <>
       <div className="featured-projects">
@@ -58,12 +44,14 @@ export function ProjectGallery({ featuredProjects, moreProjects }: ProjectGaller
           <article className="project-feature" key={project.title}>
             <div className="project-visual">
               <div className="project-image">
-                <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 960px) 100vw, 58vw" className="object-cover object-center" />
+                <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 960px) calc(100vw - 2rem), 58vw" className="object-cover object-center" />
               </div>
             </div>
             <div className="min-w-0">
               <p className="project-count">{project.number}</p>
-              <h3 className="project-title">{project.title}</h3>
+              <h3 className="project-title">
+                <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+              </h3>
               <p className="project-description">{project.description}</p>
               <div className="tag-list" aria-label={`Technologies used for ${project.title}`}>
                 {project.tags.map((tag) => (
@@ -72,39 +60,35 @@ export function ProjectGallery({ featuredProjects, moreProjects }: ProjectGaller
                   </span>
                 ))}
               </div>
-              <ProjectLinks links={project.links} />
+              <ProjectLinks links={project.links} project={project} />
             </div>
           </article>
         ))}
       </div>
 
-      <div className="more-projects-control">
-        <div>
-          <p className="project-count">Project archive</p>
-          <p>More product, mobile, IoT, and interface explorations—each with its own visual preview.</p>
-        </div>
-        <button
-          className="button-secondary"
-          type="button"
-          aria-expanded={showMore}
-          aria-controls="more-projects"
-          onClick={() => setShowMore((current) => !current)}
-        >
-          {showMore ? "Hide other projects" : "View more projects"}
-          {showMore ? <ChevronUp className="h-4 w-4" aria-hidden="true" /> : <ChevronDown className="h-4 w-4" aria-hidden="true" />}
-        </button>
-      </div>
+      <details className="more-projects-disclosure">
+        <summary className="more-projects-control">
+          <div>
+            <p className="project-count">Project archive</p>
+            <p>More product, mobile, IoT, and interface explorations—each with its own visual preview.</p>
+          </div>
+          <span className="button-secondary">
+            View more projects
+            <ChevronDown className="h-4 w-4" aria-hidden="true" />
+          </span>
+        </summary>
 
-      {showMore && (
         <div id="more-projects" className="more-projects-grid">
           {moreProjects.map((project) => (
             <article className="more-project-card" key={project.title}>
               <div className="more-project-image">
-                <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 720px) 100vw, 50vw" className="object-cover object-center" />
+                <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 720px) calc(100vw - 1.25rem), 50vw" className="object-cover object-center" />
               </div>
               <div className="more-project-content">
                 <p className="project-count">{project.number}</p>
-                <h3>{project.title}</h3>
+                <h3>
+                  <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+                </h3>
                 <p>{project.description}</p>
                 <div className="tag-list" aria-label={`Technologies used for ${project.title}`}>
                   {project.tags.map((tag) => (
@@ -113,12 +97,12 @@ export function ProjectGallery({ featuredProjects, moreProjects }: ProjectGaller
                     </span>
                   ))}
                 </div>
-                <ProjectLinks links={project.links} />
+                <ProjectLinks links={project.links} project={project} />
               </div>
             </article>
           ))}
         </div>
-      )}
+      </details>
     </>
   )
 }

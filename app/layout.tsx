@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Manrope, Playfair_Display } from "next/font/google"
+import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
 const manrope = Manrope({
@@ -16,24 +17,79 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Rafi Iqbal — Frontend Developer",
-    template: "%s — Rafi Iqbal",
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Portfolio Rafi Iqbal, frontend developer based in Semarang building responsive web and mobile experiences.",
-  keywords: ["Rafi Iqbal", "Frontend Developer", "Vue.js", "React", "Flutter", "Semarang"],
-  authors: [{ name: "Rafi Iqbal" }],
-  creator: "Rafi Iqbal",
+  description: siteConfig.description,
+  applicationName: `${siteConfig.name} Portfolio`,
+  keywords: [
+    "Rafi Iqbal Rendy Syachputra",
+    "Rafi Iqbal Rendy",
+    "Rafi Iqbal Syachputra",
+    "Rafi Iqbal",
+    "frontend developer Semarang",
+    "web developer Semarang",
+    "Vue.js developer",
+    "Nuxt.js developer",
+    "React developer",
+    "Next.js developer",
+    "Tailwind CSS developer",
+    "frontend developer Indonesia",
+  ],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
+  category: "technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "Rafi Iqbal — Frontend Developer",
-    description: "Clear, responsive, and carefully crafted digital experiences.",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: "/",
+    siteName: `${siteConfig.name} Portfolio`,
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} — Frontend Developer in Semarang`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icon.svg",
+  },
+  verification: {
+    google: "ZmMGctcq9nIwDjjQRKbFWQ6GXYXXqh8UsHdEjMM3pj0",
   },
 }
 

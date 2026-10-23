@@ -25,6 +25,13 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   async headers() {
     return [
       {

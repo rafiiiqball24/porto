@@ -2,6 +2,15 @@ import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, Download, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Certificate",
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
 
 interface CertificatePageProps {
   params: Promise<{

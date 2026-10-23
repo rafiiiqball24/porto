@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Download, Menu, X } from "lucide-react"
 import { BrandMark } from "@/components/brand-mark"
+import { siteConfig } from "@/lib/site-config"
 
 const navigation = [
   { label: "Work", href: "#work", id: "work" },
@@ -50,7 +51,7 @@ export function SiteNav() {
       <div className="site-shell flex min-h-[4.8rem] items-center justify-between gap-5">
         <Link href="#top" className="brand-link flex min-h-11 items-center gap-3" onClick={closeMenu}>
           <BrandMark className="brand-symbol" />
-          <span className="hidden text-sm font-extrabold tracking-[-0.02em] sm:inline">Rafi Iqbal</span>
+          <span className="hidden text-sm font-extrabold tracking-[-0.02em] sm:inline">{siteConfig.shortName}</span>
           <span className="sr-only">Back to top</span>
         </Link>
 
